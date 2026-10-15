@@ -9,6 +9,7 @@ from .serializers import (
     ForgotPasswordSerializer,
     ResetPasswordSerializer,
 )
+from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
 """ 
@@ -16,6 +17,7 @@ from .serializers import (
         Registration View 
     ============================
 """
+@swagger_auto_schema(method='post', request_body=UserRegistrationSerializer)
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @authentication_classes([])
@@ -32,6 +34,7 @@ def RegistrationView(request):
         Verify otp view
     ============================
 """
+@swagger_auto_schema(method='post', request_body=VerifyOtpSerializer)
 @api_view(["POST"])
 @authentication_classes([])
 def VerifyOtpView(request):
@@ -62,6 +65,7 @@ def VerifyOtpView(request):
     ===========================
 """
 from .utils import generate_otp
+@swagger_auto_schema(method='post', request_body=ForgotPasswordSerializer)
 @api_view(['POST'])
 @authentication_classes([])
 def forgotPasswordView(request):
@@ -87,6 +91,7 @@ def forgotPasswordView(request):
         Reset password view
     ==============================
 """
+@swagger_auto_schema(method='post', request_body=ResetPasswordSerializer)
 @api_view(["POST"])
 @authentication_classes([])
 def ResetPasswordView(request):
