@@ -14,7 +14,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         try:
             user = User.objects.create_user(
                 email = validate_data.get('email'),
-                username = validate_data.get('username'),
+                username = validate_data.get('username') if validate_data.get('username') else None,
                 password = validate_data.get('password')
             )
             verification_otp = generate_otp()
